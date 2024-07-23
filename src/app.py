@@ -20,6 +20,12 @@ exams=[
   {'exam_id':105,'exam_time':'engineer', 'exam_center':'a', 'exam_subject':'b', 'exam_plan':'c', 'exam_cost':1212},
 ]
 
+managers=[
+  {'mgr_id':101,'mgr_name':'Imi'},
+  {'mgr_id':102,'mgr_name':'comsom'},
+  {'mgr_id':103,'mgr_name':'John'}
+  ]
+
 @app.route('/departments', methods=['GET'])
 def get_departments():
   return jsonify(departments)
@@ -42,14 +48,6 @@ def get_exam_by_id(id: int):
   if exam is None:
     return jsonify({ 'error': 'exams does not exist'}), 404
   return jsonify(exam)
-"""
-Manager get class start form here -Dipesh
-"""
-managers=[
-  {'mgr_id':101,'mgr_name':'Imi'},
-  {'mgr_id':102,'mgr_name':'comsom'},
-  {'mgr_id':103,'mgr_name':'John'}
-  ]
 
 @app.route('/manager',methods=['GET'])
 def get_managers():
