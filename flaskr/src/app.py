@@ -1,9 +1,9 @@
 # py -m flask --app app run
 import json
-from departmentService import *
+from service.departmentService import *
 from flask import Flask, jsonify, request
 
-app = Flask(__name__)
+app = Flask(__name__)   
 
 #deparment information 
 departments=[
