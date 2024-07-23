@@ -42,6 +42,25 @@ def get_exam_by_id(id: int):
   if exam is None:
     return jsonify({ 'error': 'exams does not exist'}), 404
   return jsonify(exam)
+"""
+Manager get class start form here -Dipesh
+"""
+managers=[
+  {'mgr_id':101,'mgr_name':'Imi'},
+  {'mgr_id':102,'mgr_name':'comsom'},
+  {'mgr_id':103,'mgr_name':'John'}
+  ]
+
+@app.route('/manager',methods=['GET'])
+def get_managers():
+  return jsonify(managers)
+
+@app.route('/manager/<int:id>',methods=['GET'])
+def get_manager_by_id(id:int):
+  manager = get_data_from_id(id,"mgr_id",managers)
+  if manager is None:
+    return jsonify({'error':'manager does not exits'}), 404
+  return jsonify(manager)
 
 if __name__ == '__main__':
   #app.run(debug=true)
