@@ -26,6 +26,15 @@ managers=[
   {'mgr_id':103,'mgr_name':'John'}
   ]
 
+study=[
+{'study_id':101,'study_topic':'engineer', 'context':'a', 'category':'b', 'prerequisite':'c', 'cost':112 ,'level':'easy','plan':'july'},
+{'study_id':102,'study_topic':'engineer', 'context':'a', 'category':'b', 'prerequisite':'c', 'cost':1120,'level':'easy','plan':'july'},
+{'study_id':104,'study_topic':'engineer', 'context':'a', 'category':'b', 'prerequisite':'c', 'cost':5112,'level':'easy','plan':'july'},
+{'study_id':110,'study_topic':'engineer', 'context':'a', 'category':'b', 'prerequisite':'c', 'cost':1152,'level':'easy','plan':'july'},
+{'study_id':105,'study_topic':'engineer', 'context':'a', 'category':'b', 'prerequisite':'c', 'cost':1212,'level':'easy','plan':'july'},
+]
+
+
 @app.route('/departments', methods=['GET'])
 def get_departments():
   return jsonify(departments)
@@ -60,7 +69,17 @@ def get_manager_by_id(id:int):
     return jsonify({'error':'manager does not exits'}), 404
   return jsonify(manager)
 
+@app.route('/study',methods=['GET'])
+def get_study():
+  return jsonify(study)
+
+@app.route('/study/<int:id>',methods=['GET'])
+def get_study_by_id(id:int):
+  std = get_data_from_id(id,"study_id",study)
+  if std is None:
+    return jsonify({'error':'Study does not exits'}), 404
+  return jsonify(std)
+
 if __name__ == '__main__':
   #app.run(debug=true)
-  app.run(port=5000)
-  app.run(debug = True)
+  app.run(port=5000,debug=True)
