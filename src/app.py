@@ -1,6 +1,7 @@
 # py -m flask --app app run
 import json
 from service.helper import *
+from service.db.dbConfig import *
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)   
@@ -34,6 +35,11 @@ study=[
 {'study_id':105,'study_topic':'engineer', 'context':'a', 'category':'b', 'prerequisite':'c', 'cost':1212,'level':'easy','plan':'july'},
 ]
 
+
+@app.route('/test', methods=['GET'])
+def get_data():
+  my_data=insert_data(1, {'mgr_id':103,'mgr_name':'John'})
+  return jsonify(my_data)
 
 @app.route('/departments', methods=['GET'])
 def get_departments():
