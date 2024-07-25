@@ -1,4 +1,4 @@
-# py -m flask --app app run
+# py -m flask --app tapp run
 import json
 from service.helper import *
 from service.db.dbConfig import *
@@ -6,84 +6,85 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)   
 
-#deparment information 
-departments=[
-  {'dept_id':101,'dept_name':'engineer'},
-  {'dept_id':102,'dept_name':'Consultant'},
-  {'dept_id':103,'dept_name':'Sales'}
-]
 
-exams=[
-  {'exam_id':101,'exam_time':'engineer', 'exam_center':'a', 'exam_subject':'b', 'exam_plan':'c', 'exam_cost':112},
-  {'exam_id':102,'exam_time':'engineer', 'exam_center':'a', 'exam_subject':'b', 'exam_plan':'c', 'exam_cost':1120},
-  {'exam_id':104,'exam_time':'engineer', 'exam_center':'a', 'exam_subject':'b', 'exam_plan':'c', 'exam_cost':5112},
-  {'exam_id':110,'exam_time':'engineer', 'exam_center':'a', 'exam_subject':'b', 'exam_plan':'c', 'exam_cost':1152},
-  {'exam_id':105,'exam_time':'engineer', 'exam_center':'a', 'exam_subject':'b', 'exam_plan':'c', 'exam_cost':1212},
-]
+next_management_id=14
 
-managers=[
-  {'mgr_id':101,'mgr_name':'Imi'},
-  {'mgr_id':102,'mgr_name':'comsom'},
-  {'mgr_id':103,'mgr_name':'John'}
-  ]
+@app.route('/all', methods=['GET'])
+def get_all_fucking_data():
+  my_data = get_all_data()
+  return jsonify(my_data)
 
-study=[
-{'study_id':101,'study_topic':'engineer', 'context':'a', 'category':'b', 'prerequisite':'c', 'cost':112 ,'level':'easy','plan':'july'},
-{'study_id':102,'study_topic':'engineer', 'context':'a', 'category':'b', 'prerequisite':'c', 'cost':1120,'level':'easy','plan':'july'},
-{'study_id':104,'study_topic':'engineer', 'context':'a', 'category':'b', 'prerequisite':'c', 'cost':5112,'level':'easy','plan':'july'},
-{'study_id':110,'study_topic':'engineer', 'context':'a', 'category':'b', 'prerequisite':'c', 'cost':1152,'level':'easy','plan':'july'},
-{'study_id':105,'study_topic':'engineer', 'context':'a', 'category':'b', 'prerequisite':'c', 'cost':1212,'level':'easy','plan':'july'},
-]
+@app.route('/users', methods=['POST'])
+def create_user():
+  global next_management_id
+  input_data = json.loads(request.data)
+  if not (input_data):
+    return jsonify({ 'error': 'Invalid user properties.' }), 400
+  input_data['study_management_id'] = next_management_id
+  insert_data_response = insert_data(next_management_id, input_data)
+  
+  next_management_id += 1
+  
+  return insert_data_response
 
+
+""""
+Get Method are from here
+Getby data by types, send the datatypes and retrieve data
+get data by id, send the datatypes and id , if they match then retrieve dat
+"""
 
 @app.route('/test', methods=['GET'])
 def get_data():
-  my_data=insert_data(1, {'mgr_id':103,'mgr_name':'John'})
+  my_data = insert_data(1, {'mgr_id':103,'mgr_name':'John'})
   return jsonify(my_data)
 
 @app.route('/departments', methods=['GET'])
 def get_departments():
-  return jsonify(departments)
+  result = jsonify(get_data_by_type("departments"))
+  return result
 
-@app.route('/department/<int:id>', methods=['GET'])
+@app.route('/departments/<int:id>', methods=['GET'])
 def get_department_by_id(id: int):
-  department = get_data_from_id(id, "dept_id", departments)
+  department = get_data_by_route_id("departments",id, "dept_id")
   if department is None:
     return jsonify({ 'error': 'department does not exist'}), 404
   return jsonify(department)
 
 @app.route('/exams', methods=['GET'])
 def get_exams():
-  return jsonify(exams)
-
+  result = jsonify(get_data_by_type("exams"))
+  return (result)
 
 @app.route('/exams/<int:id>', methods=['GET'])
 def get_exam_by_id(id: int):
-  exam = get_data_from_id(id, "exam_id", exams)
+  exam = get_data_by_route_id("exams",id, "exam_id")
   if exam is None:
     return jsonify({ 'error': 'exams does not exist'}), 404
   return jsonify(exam)
 
-@app.route('/manager',methods=['GET'])
+@app.route('/managers',methods=['GET'])
 def get_managers():
-  return jsonify(managers)
+  result = jsonify(get_data_by_type("managers"))
+  return (result)
 
-@app.route('/manager/<int:id>',methods=['GET'])
+@app.route('/managers/<int:id>',methods=['GET'])
 def get_manager_by_id(id:int):
-  manager = get_data_from_id(id,"mgr_id",managers)
+  manager = get_data_by_route_id("managers", id, "mgr_id")
   if manager is None:
     return jsonify({'error':'manager does not exits'}), 404
   return jsonify(manager)
 
-@app.route('/study',methods=['GET'])
+@app.route('/studies',methods=['GET'])
 def get_study():
-  return jsonify(study)
+  result = jsonify(get_data_by_type("studies"))
+  return (result)
 
-@app.route('/study/<int:id>',methods=['GET'])
+@app.route('/studies/<int:id>',methods=['GET'])
 def get_study_by_id(id:int):
-  std = get_data_from_id(id,"study_id",study)
+  std = get_data_by_route_id("studies",id, "study_id")
   if std is None:
-    return jsonify({'error':'Study does not exits'}), 404
+    return jsonify({'error':'Study does no exits'}), 404
   return jsonify(std)
 
 if __name__ == '__main__':
