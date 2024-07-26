@@ -20,6 +20,14 @@ my_db = [
   {"study_management_id": 12, "type_key": "studies", 'study_id':102, 'study_topic':'engineer',"context":"abc","category":"a","prerequisite":"python","cost":2102,"level":"easy","plan":"july9"},
   {"study_management_id": 13, "type_key": "studies", 'study_id':103, 'study_topic':'engineer',"context":"abc","category":"a","prerequisite":"python","cost":2102,"level":"easy","plan":"july9"},
   {"study_management_id": 14, "type_key": "studies", 'study_id':104, 'study_topic':'engineer',"context":"abc","category":"a","prerequisite":"python","cost":2102,"level":"easy","plan":"july9"},
+ 
+  #user Login Information
+  {"study_management_id": 15, "type_key": "users", 'user_id':10101, 'password':'123456','role': 'user'},
+  {"study_management_id": 16, "type_key": "users", 'user_id':10102,'password':'7891011','role': 'user'},
+
+  #manager Login Information
+  {"study_management_id": 17, "type_key": "users", 'user_id':10201, 'password':'123456', 'role': 'manager', 'mgr_id':101},
+  {"study_management_id": 18, "type_key": "users", 'user_id':10202,'password':'7891011','role': 'manager', 'mgr_id':102}
 ]
 
 
