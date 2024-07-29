@@ -34,6 +34,11 @@ my_db = [
 def get_all_data():
   return my_db
 
+def delete_data_from_db(id: int):
+  global my_db
+  my_db = [m for m in my_db if m['study_management_id'] != id]
+  return {"success":"true"}
+
 def get_data_from_db(id: int):
   return next((d for d in my_db if d["study_management_id"] == id), None)
 

@@ -14,6 +14,11 @@ def get_all_fucking_data():
   my_data = get_all_data()
   return jsonify(my_data)
 
+
+@app.route('/delete/<int:id>', methods=['DELETE'])
+def delete_data(id: int):
+  response = delete_data_from_db(id)
+  return jsonify(response)
 # @app.route('/users', methods=['POST'])
 # def create_user():
 #   global next_management_id
