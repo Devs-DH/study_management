@@ -34,6 +34,11 @@ my_db = [
 def get_all_data():
   return my_db
 
+def delete_data_from_db(id: int):
+  global my_db
+  my_db = [m for m in my_db if m['study_management_id'] != id]
+  return {"success":"true"}
+
 def get_data_from_db(id: int):
   return next((d for d in my_db if d["study_management_id"] == id), None)
 
@@ -56,6 +61,11 @@ def insert_data(id:int, data:any):
     my_db.append(data)
     return {"success": "true", "data": data }
   return {"success": "false", "data": {"error": "error"} }
+
+def delete_data_from_db(id: int):
+  global my_db
+  my_db = [m for m in my_db if m['study_management_id'] != id]
+  return {"success":"true"}
 
 def update_data(data:any):
   key = data.get("study_management_id")
