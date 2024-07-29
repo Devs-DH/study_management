@@ -56,3 +56,13 @@ def insert_data(id:int, data:any):
     my_db.append(data)
     return {"success": "true", "data": data }
   return {"success": "false", "data": {"error": "error"} }
+
+def update_data(data:any):
+  key = data.get("study_management_id")
+  for item in my_db:
+    if item['study_management_id'] == key:
+      item.update(data)
+      return {'Update success':"True","data":data}
+    
+  return {'Update Failed':"false","data":{"error":"error"}}
+        
