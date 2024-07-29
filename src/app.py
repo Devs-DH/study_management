@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.register_blueprint(get_routes)
 app.register_blueprint(post_routes)
 app.register_blueprint(put_routes)
-app.register_blueprint(delete)
+app.register_blueprint(delete_routes)
 
 if __name__ == '__main__':
   #app.run(debug=true)
