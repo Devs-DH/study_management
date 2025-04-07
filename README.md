@@ -43,7 +43,7 @@ To get started, follow the steps below:
 4. Start the **backend** server:
 
     ```bash
-    cd ../backend
+    cd ../src
     flask run
     ```
 
