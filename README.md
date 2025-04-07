@@ -67,7 +67,8 @@ Now you can access the project locally!
 Feel free to fork the repository, submit issues, or create pull requests. Contributions are always welcome!
 
 ## 👥 Author
--
+-https://github.com/enothfmc
+-https://github.com/Devs-DH
 
 ## 📜 License 
 super free
