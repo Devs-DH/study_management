@@ -1,2 +1,4 @@
 # study_management
-Fabio and Dipesh
+Tech stack
+Backend: Flask(python)
+Frontend: JS(react)
