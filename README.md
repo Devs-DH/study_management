@@ -13,11 +13,8 @@ Welcome to the **Study Management System**! This project is designed for the pur
 - Provides folder structure; you can implement your own components  
 
 ## 🚀 Features
-- **User-friendly Interface:** Easily manage tasks, schedules, and assignments.  
+- **User-friendly Interface:** ...not implement yet
 - **API-Driven Backend:** Flask provides a fast and flexible API to handle all user requests.  
-- **Real-Time Updates:** React ensures a dynamic, responsive front-end experience.  
-- **Task Management:** Add, edit, and track study tasks and assignments.  
-- **Study Schedule:** Organize and plan study hours effectively.
 
 ## 🛠️ Installation
 
